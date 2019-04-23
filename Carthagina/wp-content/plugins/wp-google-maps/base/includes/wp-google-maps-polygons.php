@@ -237,19 +237,10 @@ function wpgmaps_b_admin_add_poly_javascript($mapid) {
 
         if (isset($res->kml)) { $kml = $res->kml; } else { $kml = false; }
 
-        
-        $wpgmza_settings = get_option("WPGMZA_OTHER_SETTINGS");
-        if (isset($wpgmza_settings['wpgmza_api_version']) && $wpgmza_settings['wpgmza_api_version'] != "") {
-            $api_version_string = "v=".$wpgmza_settings['wpgmza_api_version']."&";
-        } else {
-            $api_version_string = "v=3.exp&";
-        }
-
-
         ?>
         <link rel='stylesheet' id='wpgooglemaps-css'  href='<?php echo wpgmaps_get_plugin_url(); ?>/css/wpgmza_style.css' type='text/css' media='all' />
         <script type="text/javascript" >
-            jQuery(document).ready(function(){
+			jQuery(function($) {
                     function wpgmza_InitMap() {
                         var myLatLng = new google.maps.LatLng(<?php echo $wpgmza_lat; ?>,<?php echo $wpgmza_lng; ?>);
                         MYMAP.init('#wpgmza_map', myLatLng, <?php echo $start_zoom; ?>);
@@ -464,7 +455,7 @@ function wpgmaps_b_admin_edit_poly_javascript($mapid,$polyid) {
             var poly_markers = [];
             var poly_path = new google.maps.MVCArray;
                 
-            jQuery(document).ready(function(){
+            jQuery(function($) {
                 
                     function wpgmza_InitMap() {
                         var myLatLng = new google.maps.LatLng(<?php echo $wpgmza_lat; ?>,<?php echo $wpgmza_lng; ?>);
@@ -796,19 +787,21 @@ function wpgmza_b_return_poly_options($poly_id) {
 function wpgmza_b_return_polygon_array($poly_id) {
     global $wpdb;
     global $wpgmza_tblname_poly;
+	
     $results = $wpdb->get_results($wpdb->prepare("SELECT * FROM $wpgmza_tblname_poly WHERE `id` = %d LIMIT 1",intval($poly_id)) );
-    foreach ( $results as $result ) {
-        $current_polydata = $result->polydata;
-        $new_polydata = str_replace("),(","|",$current_polydata);
-        $new_polydata = str_replace("(","",$new_polydata);
-        $new_polydata = str_replace("),","",$new_polydata);
-        $new_polydata = explode("|",$new_polydata);
-        foreach ($new_polydata as $poly) {
-            
-            $ret[] = $poly;
-        }
-        return $ret;
-    }
+	
+	if(empty($results))
+		return null;
+	
+	$polyline = $results[0];
+	$polydata = $polyline->polydata;
+	
+	$regex = '/-?(\d+)(\.\d+)?,\s*-?(\d+)(\.\d+)?/';
+	
+	if(!preg_match_all($regex, $polydata, $m))
+		return array();
+	
+	return $m[0];
 }
 
 /**

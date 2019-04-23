@@ -4,7 +4,7 @@
  * @requires WPGMZA.Map
  * @pro-requires WPGMZA.ProMap
  */
-(function($) {
+jQuery(function($) {
 	var Parent;
 	
 	/**
@@ -27,9 +27,10 @@
 			
 			if(status.code == "USER_CONSENT_NOT_GIVEN")
 			{
-				console.log(WPGMZA.api_consent_html);
 				return;
 			}
+			
+			$(element).html("<div class='notice notice-error'><p>" + WPGMZA.localized_strings.google_api_not_loaded + "<pre>" + message + "</pre></p></div>");
 			
 			throw new Error(message);
 		}
@@ -74,6 +75,8 @@
 		// Dispatch event
 		if(!WPGMZA.isProVersion())
 		{
+			this.trigger("init");
+			
 			this.dispatchEvent("created");
 			WPGMZA.events.dispatchEvent({type: "mapcreated", map: this});
 		}
@@ -102,6 +105,7 @@
 		var options = this.settings.toGoogleMapsOptions();
 		
 		this.googleMap = new google.maps.Map(this.engineElement, options);
+		
 		google.maps.event.addListener(this.googleMap, "bounds_changed", function() { 
 			self.onBoundsChanged();
 		});
@@ -112,7 +116,7 @@
 			this.enableTrafficLayer(true);
 		if(this.settings.transport == 1)
 			this.enablePublicTransportLayer(true);
-		this.showPointsOfInterest(this.settings.show_points_of_interest);
+		this.showPointsOfInterest(this.settings.show_point_of_interest);
 		
 		// Move the loading wheel into the map element (it has to live outside in the HTML file because it'll be overwritten by Google otherwise)
 		$(this.engineElement).append($(this.element).find(".wpgmza-loader"));
@@ -122,14 +126,34 @@
 	{
 		Parent.prototype.setOptions.call(this, options);
 		
-		this.googleMap.setOptions(this.settings.toGoogleMapsOptions());
+		var converted = $.extend(options, this.settings.toGoogleMapsOptions());
 		
-		var clone = $.extend({}, options);
-		if(clone.center instanceof WPGMZA.LatLng || typeof clone.center == "object")
+		//this.googleMap.setOptions(converted);
+		
+		var clone = $.extend({}, converted);
+		if(!clone.center instanceof google.maps.LatLng && (clone.center instanceof WPGMZA.LatLng || typeof clone.center == "object"))
 			clone.center = {
 				lat: parseFloat(clone.center.lat),
 				lng: parseFloat(clone.center.lng)
 			};
+		
+		if(this.settings.hide_point_of_interest == "1")
+		{
+			var noPoi = {
+				featureType: "poi",
+				elementType: "labels",
+				stylers: [
+					{
+						visibility: "off"
+					}
+				]
+			};
+			
+			if(!clone.styles)
+				clone.styles = [];
+			
+			clone.styles.push(noPoi);
+		}
 		
 		this.googleMap.setOptions(clone);
 	}
@@ -275,7 +299,10 @@
 	 */
 	WPGMZA.GoogleMap.prototype.setZoom = function(value)
 	{
-		return this.googleMap.setZoom(value);
+		if(isNaN(value))
+			throw new Error("Value must not be NaN");
+		
+		return this.googleMap.setZoom(parseInt(value));
 	}
 	
 	/**
@@ -288,16 +315,25 @@
 		var northEast = bounds.getNorthEast();
 		var southWest = bounds.getSouthWest();
 		
-		return {
-			topLeft: {
-				lat: northEast.lat(),
-				lng: southWest.lng()
-			},
-			bottomRight: {
-				lat: southWest.lat(),
-				lng: northEast.lng()
-			}
+		var nativeBounds = new WPGMZA.LatLngBounds({});
+		
+		nativeBounds.north = northEast.lat();
+		nativeBounds.south = southWest.lat();
+		nativeBounds.west = southWest.lng();
+		nativeBounds.east = northEast.lng();
+		
+		// Backward compatibility
+		nativeBounds.topLeft = {
+			lat: northEast.lat(),
+			lng: southWest.lng()
 		};
+		
+		nativeBounds.bottomRight = {
+			lat: southWest.lat(),
+			lng: northEast.lng()
+		};
+		
+		return nativeBounds;
 	}
 	
 	/**
@@ -310,8 +346,23 @@
 			southWest = {lat: southWest.lat, lng: southWest.lng};
 		if(northEast instanceof WPGMZA.LatLng)
 			northEast = {lat: northEast.lat, lng: northEast.lng};
+		else if(southWest instanceof WPGMZA.LatLngBounds)
+		{
+			var bounds = southWest;
+			
+			southWest = {
+				lat: bounds.south,
+				lng: bounds.west
+			};
+			
+			northEast = {
+				lat: bounds.north,
+				lng: bounds.east
+			};
+		}
 		
-		this.googleMap.fitBounds(southWest, northEast);
+		var nativeBounds = new google.maps.LatLngBounds(southWest, northEast);
+		this.googleMap.fitBounds(nativeBounds);
 	}
 	
 	/**
@@ -496,4 +547,4 @@
 		google.maps.event.trigger(this.googleMap, "resize");
 	}
 	
-})(jQuery);
+});

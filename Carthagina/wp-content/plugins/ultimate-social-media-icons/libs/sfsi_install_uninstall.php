@@ -12,7 +12,7 @@ function sfsi_update_plugin()
     }
     
     //Install version
-    update_option("sfsi_pluginVersion", "2.04");
+    update_option("sfsi_pluginVersion", "2.20");
 
     if(!get_option('sfsi_serverphpVersionnotification'))
     {
@@ -64,7 +64,12 @@ function sfsi_update_plugin()
             "sfsi_instagram_count" => ""
         );
         add_option('sfsi_instagram_sf_count',  serialize($sfsi_instagram_sf_count));
-    }    
+    }else{
+        $sfsi_instagram_sf_count = unserialize(get_option('sfsi_instagram_sf_count',false));
+        $sfsi_instagram_sf_count["date_sf"] = $sfsi_instagram_sf_count["date"];
+        $sfsi_instagram_sf_count["date_instagram"] = $sfsi_instagram_sf_count["date"];
+        update_option('sfsi_instagram_sf_count',$sfsi_instagram_sf_count);
+    }
 
     $option4 = unserialize(get_option('sfsi_section4_options',false));
 
@@ -79,6 +84,19 @@ function sfsi_update_plugin()
         /*Youtube Channelid settings*/
         if(!isset($option4['sfsi_youtube_channelId'])){
             $option4['sfsi_youtube_channelId'] = '';            
+        }
+    }
+
+    $option3 = unserialize(get_option('sfsi_section3_options',false));
+    
+    if(isset($option3) && !empty($option3))
+    {
+        if(!isset($option3['sfsi_mouseOver_effect_type'])){
+            $option3['sfsi_mouseOver_effect_type'] = 'same_icons';
+        }
+
+        if(!isset($option3['mouseover_other_icons_transition_effect'])){
+            $option3['mouseover_other_icons_transition_effect'] = 'flip';
         }
     }
 
@@ -310,7 +328,7 @@ function sfsi_activate_plugin()
                 'sfsi_email_display'=>'yes',
                 'sfsi_facebook_display'=>'yes',
                 'sfsi_twitter_display'=>'yes',
-                'sfsi_google_display'=>'yes',
+                'sfsi_google_display'=>'no',
                 'sfsi_pinterest_display'=>'no',
                 'sfsi_instagram_display'=>'no',
                 'sfsi_linkedin_display'=>'no',
@@ -388,13 +406,18 @@ function sfsi_activate_plugin()
 	if(!isset($option3) || empty($option3)){
 
         /* Design and animation option  */
-        $options3=array('sfsi_mouseOver'=>'no',
-            'sfsi_mouseOver_effect'=>'fade_in',
-            'sfsi_shuffle_icons'=>'no',
-            'sfsi_shuffle_Firstload'=>'no',
-            'sfsi_shuffle_interval'=>'no',
-            'sfsi_shuffle_intervalTime'=>'',                              
-            'sfsi_actvite_theme'=>'default' );
+        $options3 = array(
+
+            'sfsi_mouseOver'             =>'no',
+            'sfsi_mouseOver_effect'      =>'fade_in',
+            'sfsi_mouseOver_effect_type' => 'same_icons',
+            'mouseover_other_icons_transition_effect' => 'flip',
+            'sfsi_shuffle_icons'         =>'no',
+            'sfsi_shuffle_Firstload'     =>'no',
+            'sfsi_shuffle_interval'      =>'no',
+            'sfsi_shuffle_intervalTime'  =>'',                              
+            'sfsi_actvite_theme'         =>'default' 
+        );
         add_option('sfsi_section3_options',  serialize($options3));
     }
     
@@ -472,12 +495,12 @@ function sfsi_activate_plugin()
             'sfsi_rssIcon_order'		=>'1',
             'sfsi_emailIcon_order'		=>'2',	
             'sfsi_facebookIcon_order'	=>'3',
-            'sfsi_googleIcon_order'		=>'4',
-            'sfsi_twitterIcon_order'	=>'5',
-            'sfsi_youtubeIcon_order'	=>'7',
-            'sfsi_pinterestIcon_order'	=>'8',
-            'sfsi_linkedinIcon_order'	=>'9',
-            'sfsi_instagramIcon_order'	=>'10',
+            'sfsi_twitterIcon_order'	=>'4',
+            'sfsi_youtubeIcon_order'	=>'5',
+            'sfsi_pinterestIcon_order'	=>'7',
+            'sfsi_linkedinIcon_order'	=>'8',
+            'sfsi_instagramIcon_order'	=>'9',
+            'sfsi_googleIcon_order'		=>'10',
             'sfsi_CustomIcons_order'	=>'',
             'sfsi_rss_MouseOverText'	=>'RSS',
             'sfsi_email_MouseOverText'	=>'Follow by Email',
@@ -624,7 +647,8 @@ function sfsi_activate_plugin()
     
     /*Extra important options*/
     $sfsi_instagram_sf_count = array(
-        "date" => strtotime(date("Y-m-d")),
+        "date_sf" => strtotime(date("Y-m-d")),
+        "date_instagram" => strtotime(date("Y-m-d")),
         "sfsi_sf_count" => "",
         "sfsi_instagram_count" => ""
     );
@@ -879,42 +903,97 @@ function sfsi_rating_msg()
     $datetime1 = new DateTime($install_date);
     $datetime2 = new DateTime($display_date);
     $diff_inrval = round(($datetime2->format('U') - $datetime1->format('U')) / (60*60*24));
-    if($diff_inrval >= 30 && get_option('sfsi_RatingDiv')=="no")
+    
+    if($diff_inrval >= 30 && "no" == get_option('sfsi_RatingDiv'))
     {
-     echo '<div class="sfwp_fivestar notice notice-success is-dismissible">
-                <p>We noticed you\'ve been using the Ultimate Social Media Plugin for more than 30 days. If you\'re happy with it, could you please do us a BIG favor and let us know what you think about it & what we can improve? It only takes a minute!?</p>
+      ?>
+      <style type="text/css">
+        .plg-rating-dismiss:before {
+            background: none;
+            color: #72777c;
+            content: "\f153";
+            display: block;
+            font: normal 16px/20px dashicons;
+            speak: none;
+            height: 20px;
+            text-align: center;
+            width: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }      
+        .plg-rating-dismiss{
+            position: absolute;
+            top: 0;
+            right: 15px;
+            border: none;
+            margin: 0;
+            padding: 9px;
+            background: none;
+            color: #72777c;
+            cursor: pointer;
+        }
+      </style>
+      <div class="sfwp_fivestar notice notice-success">
+                <p>You've been using the Ultimate Social Media Plugin for more than 30 days. Great! If you're happy, could you please do us a BIG favor and let us know ONE thing we can improve in it?</p>
                 <ul>
-                    <li><a href="https://wordpress.org/support/plugin/ultimate-social-media-icons#new-topic-0" target="_new" title="Yes, that\'s fair, let me give feedback!">Yes, that\'s fair, let me give feedback!</a></li>
-                    <li><a href="javascript:void(0);" class="sfsiHideRating" title="I already did">I already did</a></li>
+                    <li><a href="https://wordpress.org/support/plugin/ultimate-social-media-icons#new-topic-0" target="_new" title="Yes, that's fair, let me give feedback!">Yes, let me give feedback!</a></li>
+                    <li><a target="_new" href="https://wordpress.org/support/plugin/ultimate-social-media-icons/reviews/?filter=5">No clue, let me give a 5-star rating instead</a></li>
+                    <li><a href="javascript:void(0);" class="sfsiHideRating" title="I already did">I already did (don't show this again)</a></li>
                 </ul>
+                <button type="button" class="plg-rating-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>                
             </div>
     <script>
+
     jQuery( document ).ready(function( $ ) {
-        jQuery(\'.sfsiHideRating\').click(function(){
-            var data={\'action\':\'sfsi_hideRating\'}
-            jQuery.ajax({
-                url: "'.admin_url( 'admin-ajax.php' ).'",
-                type: "post",
-                data: data,
-                dataType: "json",
-                async: !0,
-                success: function(e)
-                {
-                    if (e=="success") {
-                       jQuery(\'.sfwp_fivestar\').slideUp(\'slow\');
+
+        var sel1 = jQuery('.sfsiHideRating');
+        var sel2 = jQuery('.plg-rating-dismiss');
+
+        function sfsi_hide_rating(element){
+
+            element.on("click",function(event){
+
+                event.stopImmediatePropagation();
+
+                var data = {'action':'sfsi_hideRating' , 'nonce':'<?php echo wp_create_nonce('sfsi_hideRating'); ?>'};
+
+                jQuery.ajax({
+                    url: "<?php echo admin_url( 'admin-ajax.php' ); ?>",
+                    type: "post",
+                    data: data,
+                    dataType: "json",
+                    async: !0,
+                    success: function(e)
+                    {
+                        if (e=="success") {
+                           jQuery('.sfwp_fivestar').slideUp('slow');
+                        }
                     }
-                }
-             });
-        })
+                 });
+            });            
+
+        }
+
+        sfsi_hide_rating(sel1);
+        sfsi_hide_rating(sel2);
+
     });
     </script>
-    ';
+    
+    <?php 
    }
 }
 
 add_action('wp_ajax_sfsi_hideRating','sfsi_HideRatingDiv', 0);
 function sfsi_HideRatingDiv()
 {
+    if ( !wp_verify_nonce( $_POST['nonce'], "sfsi_hideRating")) {
+        echo  json_encode(array('res'=>"error")); exit;
+    }
+    if(!current_user_can('manage_options')){ echo json_encode(array('res'=>'not allowed'));die(); }
+
+
+    
     update_option('sfsi_RatingDiv','yes');
     echo  json_encode(array("success")); exit;
 }

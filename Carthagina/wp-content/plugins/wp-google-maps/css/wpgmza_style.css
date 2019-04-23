@@ -204,9 +204,15 @@
     background-color:transparent !important;
     /* padding:0 !important; */ /* Moved to google-ui-compatibility.js */
     box-shadow: none !important;
-    
-    
 }
+
+/* Don't allow white border around Google logo */
+.wpgmza_map img[src$="//maps.gstatic.com/mapfiles/api-3/images/google4.png"],
+	img[src='http://maps.gstatic.com/mapfiles/api-3/images/google_white5.png']
+{
+	box-shadow: none !important;
+}
+
 #wpgmza_map img { box-shadow: none !important; }
 .wpgmza_table img {
     box-shadow: none !important;
@@ -729,23 +735,3 @@ ul.wpgmza_marker_list_class {
     letter-spacing: 0.05em;
 }
 
-/** Override the auto complete styles */
-.pac-container {
-    border-radius: 2px;
-    border-top: none;
-    font-family: Roboto, sans-serif;
-
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
-    -moz-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
-    -o-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
-}
-
-.pac-container .pac-item{
-    border-top: none;
-}
-
-.pac-container .pac-item .pac-item-query{
-    color: #333;
-
-}

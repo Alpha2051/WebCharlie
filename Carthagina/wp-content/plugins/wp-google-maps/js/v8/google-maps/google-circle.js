@@ -3,8 +3,16 @@
  * @module GoogleCircle
  * @requires WPGMZA.Circle
  */
-(function($) {
+jQuery(function($) {
 	
+	/**
+	 * Subclass, used when Google is the maps engine. <strong>Please <em>do not</em> call this constructor directly. Always use createInstance rather than instantiating this class directly.</strong> Using createInstance allows this class to be externally extensible.
+	 * @class WPGMZA.GoogleCircle
+	 * @constructor WPGMZA.GoogleCircle
+	 * @memberof WPGMZA
+	 * @augments WPGMZA.Circle
+	 * @see WPGMZA.Circle.createInstance
+	 */
 	WPGMZA.GoogleCircle = function(options, googleCircle)
 	{
 		var self = this;
@@ -49,4 +57,23 @@
 	WPGMZA.GoogleCircle.prototype = Object.create(WPGMZA.Circle.prototype);
 	WPGMZA.GoogleCircle.prototype.constructor = WPGMZA.GoogleCircle;
 	
-})(jQuery);
+	WPGMZA.GoogleCircle.prototype.setCenter = function(center)
+	{
+		WPGMZA.Circle.prototype.setCenter.apply(this, arguments);
+		
+		this.googleCircle.setCenter(center);
+	}
+	
+	WPGMZA.GoogleCircle.prototype.setRadius = function(radius)
+	{
+		WPGMZA.Circle.prototype.setRadius.apply(this, arguments);
+		
+		this.googleCircle.setRadius(parseFloat(radius) * 1000);
+	}
+	
+	WPGMZA.GoogleCircle.prototype.setVisible = function(visible)
+	{
+		this.googleCircle.setVisible(visible ? true : false);
+	}
+	
+});

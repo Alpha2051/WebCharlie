@@ -4,7 +4,7 @@
  * @requires WPGMZA.Map
  * @pro-requires WPGMZA.ProMap
  */
-(function($) {
+jQuery(function($) {
 	
 	var Parent;
 	
@@ -34,11 +34,11 @@
 			
 			// NB: The true and false values are flipped because these settings represent the "disabled" state when true
 			if(interaction instanceof ol.interaction.DragPan)
-				interaction.setActive( (this.settings.wpgmza_settings_map_draggable == "yes" ? false : true) );
+				interaction.setActive( (self.settings.wpgmza_settings_map_draggable == "yes" ? false : true) );
 			else if(interaction instanceof ol.interaction.DoubleClickZoom)
-				interaction.setActive( (this.settings.wpgmza_settings_map_clickzoom ? false : true) );
+				interaction.setActive( (self.settings.wpgmza_settings_map_clickzoom ? false : true) );
 			else if(interaction instanceof ol.interaction.MouseWheelZoom)
-				interaction.setActive( (this.settings.wpgmza_settings_map_scroll == "yes" ? false : true) );
+				interaction.setActive( (self.settings.wpgmza_settings_map_scroll == "yes" ? false : true) );
 			
 		}, this);
 		
@@ -47,7 +47,7 @@
 			
 			// NB: The true and false values are flipped because these settings represent the "disabled" state when true
 			if(control instanceof ol.control.Zoom && WPGMZA.settings.wpgmza_settings_map_zoom == "yes")
-				this.olMap.removeControl(control);
+				self.olMap.removeControl(control);
 			
 		}, this);
 		
@@ -62,9 +62,16 @@
 		});
 		this.olMap.addLayer(this.markerLayer);
 		
+		// Listen for drag start
+		this.olMap.on("movestart", function(event) {
+			self.isBeingDragged = true;
+		});
+		
 		// Listen for end of pan so we can wrap longitude if needs be
 		this.olMap.on("moveend", function(event) {
 			self.wrapLongitude();
+			
+			self.isBeingDragged = false;
 			self.dispatchEvent("dragend");
 			self.onIdle();
 		});
@@ -73,9 +80,9 @@
 		this.olMap.getView().on("change:resolution", function(event) {
 			self.dispatchEvent("zoom_changed");
 			self.dispatchEvent("zoomchanged");
-			self.onIdle();
-			
-			$(self.element).trigger("zoomchanged.wpgmza");
+			setTimeout(function() {
+				self.onIdle();
+			}, 10);
 		});
 		
 		// Listen for bounds changing
@@ -108,11 +115,15 @@
 			
 			if(event.which == 1 || event.button == 1)
 			{
-				// Left
+				if(self.isBeingDragged)
+					return;
+				
+				// Left click
 				self.trigger({
 					type: "click",
 					latLng: latLng
 				});
+				
 				return;
 			}
 			
@@ -125,6 +136,8 @@
 		// Dispatch event
 		if(!WPGMZA.isProVersion())
 		{
+			this.trigger("init");
+			
 			this.dispatchEvent("created");
 			WPGMZA.events.dispatchEvent({type: "mapcreated", map: this});
 		}
@@ -140,8 +153,13 @@
 	
 	WPGMZA.OLMap.prototype.getTileLayer = function()
 	{
+		var options = {};
+		
+		if(WPGMZA.settings.tile_server_url)
+			options.url = WPGMZA.settings.tile_server_url;
+		
 		return new ol.layer.Tile({
-			source: new ol.source.OSM()
+			source: new ol.source.OSM(options)
 		});
 	}
 	
@@ -190,9 +208,20 @@
 	WPGMZA.OLMap.prototype.getBounds = function()
 	{
 		var bounds = this.olMap.getView().calculateExtent(this.olMap.getSize());
+		var nativeBounds = new WPGMZA.LatLngBounds();
 		
 		var topLeft = ol.proj.toLonLat([bounds[0], bounds[1]]);
 		var bottomRight = ol.proj.toLonLat([bounds[2], bounds[3]]);
+		
+		nativeBounds.north = topLeft[1];
+		nativeBounds.south = bottomRight[1];
+		
+		nativeBounds.west = topLeft[0];
+		nativeBounds.east = bottomRight[0];
+		
+		return nativeBounds;
+		
+		/*return 
 		
 		return {
 			topLeft: {
@@ -203,7 +232,7 @@
 				lat: bottomRight[1],
 				lng: bottomRight[0]
 			}
-		};
+		};*/
 	}
 	
 	/**
@@ -212,27 +241,60 @@
 	 */
 	WPGMZA.OLMap.prototype.fitBounds = function(southWest, northEast)
 	{
-		this.olMap.getView().fitExtent(
-			[southWest.lng, southWest.lat, northEast.lng, northEast.lat],
-			this.olMap.getSize()
-		);
+		if(southWest instanceof WPGMZA.LatLng)
+			southWest = {lat: southWest.lat, lng: southWest.lng};
+		if(northEast instanceof WPGMZA.LatLng)
+			northEast = {lat: northEast.lat, lng: northEast.lng};
+		else if(southWest instanceof WPGMZA.LatLngBounds)
+		{
+			var bounds = southWest;
+			
+			southWest = {
+				lat: bounds.south,
+				lng: bounds.west
+			};
+			
+			northEast = {
+				lat: bounds.north,
+				lng: bounds.east
+			};
+		}
+		
+		var view = this.olMap.getView();
+		
+		var extent = ol.extent.boundingExtent([
+			ol.proj.fromLonLat([
+				parseFloat(southWest.lng),
+				parseFloat(southWest.lat)
+			]),
+			ol.proj.fromLonLat([
+				parseFloat(northEast.lng),
+				parseFloat(northEast.lat)
+			])
+		]);
+		view.fit(extent, this.olMap.getSize());
 	}
 	
-	WPGMZA.OLMap.prototype.panTo = function(latLng)
+	WPGMZA.OLMap.prototype.panTo = function(latLng, zoom)
 	{
 		var view = this.olMap.getView();
-		view.animate({
+		var options = {
 			center: ol.proj.fromLonLat([
 				parseFloat(latLng.lng),
 				parseFloat(latLng.lat),
 			]),
 			duration: 500
-		});
+		};
+		
+		if(arguments.length > 1)
+			options.zoom = parseInt(zoom);
+		
+		view.animate(options);
 	}
 	
 	WPGMZA.OLMap.prototype.getZoom = function()
 	{
-		return Math.round( this.olMap.getView().getZoom() ) + 1;
+		return Math.round( this.olMap.getView().getZoom() );
 	}
 	
 	WPGMZA.OLMap.prototype.setZoom = function(value)
@@ -412,10 +474,13 @@
 		var latLng = this.pixelsToLatLng(relX, relY);
 		
 		this.trigger({type: "rightclick", latLng: latLng});
-		$(this.element).trigger("rightclick.wpgmza");
 		
+		// Legacy event compatibility
+		$(this.element).trigger({type: "rightclick", latLng: latLng});
+		
+		// Prevent menu
 		event.preventDefault();
 		return false;
 	}
 	
-})(jQuery);
+});

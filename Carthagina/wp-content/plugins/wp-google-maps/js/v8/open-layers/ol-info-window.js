@@ -4,7 +4,7 @@
  * @requires WPGMZA.InfoWindow
  * @pro-requires WPGMZA.ProInfoWindow
  */
-(function($) {
+jQuery(function($) {
 	
 	var Parent;
 	
@@ -39,8 +39,11 @@
 		var self = this;
 		var latLng = mapObject.getPosition();
 		
-		if(!WPGMZA.InfoWindow.prototype.open.call(this, map, mapObject))
+		if(!Parent.prototype.open.call(this, map, mapObject))
 			return false;
+		
+		// Set parent for events to bubble up
+		this.parent = map;
 		
 		if(this.overlay)
 			this.mapObject.map.olMap.removeOverlay(this.overlay);
@@ -57,8 +60,8 @@
 		
 		$(this.element).show();
 		
-		this.dispatchEvent("infowindowopen");
-		$(this.element).trigger("infowindowopen.wpgmza");
+		this.trigger("infowindowopen");
+		this.trigger("domready");
 	}
 	
 	WPGMZA.OLInfoWindow.prototype.close = function(event)
@@ -71,6 +74,8 @@
 		
 		WPGMZA.InfoWindow.prototype.close.call(this);
 		
+		this.trigger("infowindowclose");
+		
 		this.mapObject.map.olMap.removeOverlay(this.overlay);
 		this.overlay = null;
 	}
@@ -82,13 +87,10 @@
 	
 	WPGMZA.OLInfoWindow.prototype.setOptions = function(options)
 	{
-		if(WPGMZA.settings.developer_mode)
-			console.log(options);
-		
 		if(options.maxWidth)
 		{
 			$(this.element).css({"max-width": options.maxWidth + "px"});
 		}
 	}
 	
-})(jQuery);
+});

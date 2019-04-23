@@ -247,9 +247,9 @@ class DOMElement extends \DOMElement
 				$html = DOMDocument::convertUTF8ToHTMLEntities($subject);
 				
 				$temp = new DOMDocument('1.0', 'UTF-8');
-				$str = "<div id='domdocument-import-payload___'>" . $subject . "</div>";
+				$str = "<div id='domdocument-import-payload___'>" . $html . "</div>";
 				
-				if(!empty($wpgmza->settings->developer_mode))
+				if($wpgmza->isInDeveloperMode())
 					$temp->loadHTML($str);
 				else
 					@$temp->loadHTML($str);
@@ -500,6 +500,44 @@ class DOMElement extends \DOMElement
 		}
 		
 		return $this;
+	}
+	
+	public function serializeFormData()
+	{
+		$data = array();
+		
+		foreach($this->querySelectorAll('input, select, textarea') as $input)
+		{
+			$name = $input->getAttribute('name');
+			
+			if(!$name)
+				continue;
+			
+			switch($input->getAttribute('type'))
+			{
+				case 'checkbox':
+				
+					if($input->getValue())
+						$data[$name] = true;
+					else
+						$data[$name] = false;
+					
+					break;
+					
+				case 'radio':
+				
+					if($input->getAttribute('checked'))
+						$data[$name] = $input->getAttribute('value');
+				
+					break;
+				
+				default:
+					$data[$name] = $input->getValue();
+					break;
+			}
+		}
+		
+		return $data;
 	}
 	
 	/**

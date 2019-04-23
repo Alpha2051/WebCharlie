@@ -87,7 +87,7 @@ class Sfsi_Widget extends WP_Widget
 		}
 		?>
 		<p>
-		    <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'Subscription and Social Icons'); ?></label>
+		    <label for="<?php echo $this->get_field_id( 'title' ); ?>">Title</label>
 		    <input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:100%;" />
 		    <input type="hidden" value="<?php echo $instance['showf'] ?>" id="<?php echo $this->get_field_id( 'showf' ); ?>" name="<?php echo $this->get_field_name( 'showf' ); ?>" />
 		</p>
@@ -401,23 +401,26 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
 
 	$current_url = sfsi_get_current_page_url();
 
-	$url = "#";
-    $cmcls = '';
-    $toolClass = '';
+	$url 		= "#";
+    $cmcls 		= '';
+    $toolClass  = '';
+
+	$socialObj = new sfsi_SocialHelper(); /* global object to access 3rd party icon's actions */	
     
 	switch($icon_name)
     {
         case "rss" :
-			 $socialObj = new sfsi_SocialHelper(); /* global object to access 3rd party icon's actions */	
-		     $url =  isset($sfsi_section2_options['sfsi_rss_url']) && !empty($sfsi_section2_options['sfsi_rss_url'])? $sfsi_section2_options['sfsi_rss_url'] : 'javascript:void(0);';
-             $toolClass = "rss_tool_bdr";
-		     $hoverdiv = '';
+
+		     $url 		=  isset($sfsi_section2_options['sfsi_rss_url']) && !empty($sfsi_section2_options['sfsi_rss_url'])? $sfsi_section2_options['sfsi_rss_url'] : '';
+
+             $toolClass   = "rss_tool_bdr";
+		     $hoverdiv    = '';
 		     $arrow_class = "bot_rss_arow";
 		     
 			 /* fecth no of counts if active in admin section */
 			 if($sfsi_section4_options['sfsi_rss_countsDisplay']=="yes" && $sfsi_section4_options['sfsi_display_counts']=="yes")
 			 {
-				 $counts=$socialObj->format_num($sfsi_section4_options['sfsi_rss_manualCounts']);
+				 $counts = $socialObj->format_num($sfsi_section4_options['sfsi_rss_manualCounts']);
 			 }
 			 
 			 if(!empty($sfsi_section5_options['sfsi_rss_MouseOverText'])) 
@@ -450,11 +453,14 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
         break;
         
 		case "email" :
-			   $socialObj = new sfsi_SocialHelper();  /* global object to access 3rd party icon's actions */	
-		       $hoverdiv = '';
+			   
+		       $hoverdiv  = '';
+			   
 			   $sfsi_section2_options['sfsi_email_url'];
-			   $url = (isset($sfsi_section2_options['sfsi_email_url'])) ? $sfsi_section2_options['sfsi_email_url'] : 'javascript:void(0);';
-			   $toolClass = "email_tool_bdr";
+
+			   $url = (isset($sfsi_section2_options['sfsi_email_url'])) ? $sfsi_section2_options['sfsi_email_url'] : '';
+
+			   $toolClass   = "email_tool_bdr";
 		       $arrow_class = "bot_eamil_arow";
 		       
 			   /* fecth no of counts if active in admin section */
@@ -510,31 +516,36 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
 			}
 			else
 			{
-				//$icon=($sfsi_section2_options['sfsi_rss_icons']=="sfsi") ? $icons_baseUrl.$active_theme."_sf.png" : $icons_baseUrl.$active_theme."_email.png";
 
 				$rss_icons = isset($sfsi_section2_options['sfsi_rss_icons']) && !empty($sfsi_section2_options['sfsi_rss_icons']) ? $sfsi_section2_options['sfsi_rss_icons'] : false;
 
-				if(false != $rss_icons){
+				switch ($rss_icons) {
 
-					if($rss_icons=="sfsi")
-					{
-						$icon = $icons_baseUrl.$active_theme."_sf.png";					
-					}
-					elseif($rss_icons=="email")
-					{
-						$icon = $icons_baseUrl.$active_theme."_email.png";
-					}					
+					case 'email':
+						$image = "_email.png";
+						break;
+
+					case 'subscribe':
+						$image = "_subscribe.png";
+						break;
+
+					case 'sfsi':
+						$image = "_sf.png";	
+						break;
+					
+					default:
+						$image = "_subscribe.png";
+						break;
 				}
-				else
-				{
-					$icon = $icons_baseUrl.$active_theme."_subscribe.png";
-				}
+
+				$icon = $icons_baseUrl.$active_theme.$image;
 			}
+
+
         break;
         
 		case "facebook" :
 
-			$socialObj 	 = new sfsi_SocialHelper();
 			$width 		 = 62;
 		    $totwith 	 = $width+28+$icons_space;
 		    $twt_margin  = $totwith/2;
@@ -555,7 +566,7 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
 
 			$url = isset($sfsi_section2_options['sfsi_facebookPage_url']) && !empty($sfsi_section2_options['sfsi_facebookPage_url']) ? $sfsi_section2_options['sfsi_facebookPage_url'] : false;
 
-		    $url = false != $url ? $sfsi_section2_options['sfsi_facebookPage_url']:'javascript:void(0);';
+		    $url = false != $url ? $sfsi_section2_options['sfsi_facebookPage_url']:'';
 
 			$like_option = isset($sfsi_section2_options['sfsi_facebookLike_option']) && !empty($sfsi_section2_options['sfsi_facebookLike_option']) ? $sfsi_section2_options['sfsi_facebookLike_option'] : false;
 
@@ -565,7 +576,7 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
 
 			if((false != $like_option && $like_option=="yes") || (false != $share_option && $share_option=="yes"))
 			{
-				 $url=($sfsi_section2_options['sfsi_facebookPage_url']) ? $sfsi_section2_options['sfsi_facebookPage_url']:'javascript:void(0);';
+				 $url=($sfsi_section2_options['sfsi_facebookPage_url']) ? $sfsi_section2_options['sfsi_facebookPage_url']:'';
 				 $hoverSHow = 1;
 				 $hoverdiv  = '';
 
@@ -640,7 +651,6 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
         case "google" :                    
 				$toolClass   = "gpls_tool_bdr";
 				$arrow_class = "bot_gpls_arow";
-				$socialObj   = new sfsi_SocialHelper();
 				$width 		 = 76;
 				$totwith 	 = $width+28+$icons_space;
 				$twt_margin  = $totwith/2;
@@ -656,7 +666,7 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
 				
 				$visit_icon = $visit_iconsUrl."google.png";
 
-				$url = isset($sfsi_section2_options['sfsi_google_pageURL']) && !empty($sfsi_section2_options['sfsi_google_pageURL']) ?$sfsi_section2_options['sfsi_google_pageURL'] : 'javascript:void(0);';
+				$url = isset($sfsi_section2_options['sfsi_google_pageURL']) && !empty($sfsi_section2_options['sfsi_google_pageURL']) ?$sfsi_section2_options['sfsi_google_pageURL'] : '';
 
 				$like_option = isset($sfsi_section2_options['sfsi_googleLike_option']) && !empty($sfsi_section2_options['sfsi_googleLike_option']) ? $sfsi_section2_options['sfsi_googleLike_option'] : false;
 
@@ -736,9 +746,8 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
 		case "twitter" :
 				$toolClass 	 = "twt_tool_bdr";
 				$arrow_class = "bot_twt_arow";
-				$socialObj 	 = new sfsi_SocialHelper();
 				
-				$url = isset($sfsi_section2_options['sfsi_twitter_pageURL']) && !empty($sfsi_section2_options['sfsi_twitter_pageURL']) ? $sfsi_section2_options['sfsi_twitter_pageURL'] : 'javascript:void(0);';
+				$url = isset($sfsi_section2_options['sfsi_twitter_pageURL']) && !empty($sfsi_section2_options['sfsi_twitter_pageURL']) ? $sfsi_section2_options['sfsi_twitter_pageURL'] : '';
 
 				$twitter_user = isset($sfsi_section2_options['sfsi_twitter_followUserName']) && !empty($sfsi_section2_options['sfsi_twitter_followUserName']) ? $sfsi_section2_options['sfsi_twitter_followUserName'] : false;
 
@@ -832,17 +841,15 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
         break;
         
 		case "youtube" :
-				$socialObj = new sfsi_SocialHelper();
 				$toolClass = "utube_tool_bdr";
 				$arrow_class = "bot_utube_arow";
-				$socialObj = new sfsi_SocialHelper();
 				$width = 96;
 				$totwith = $width+28+$icons_space;
 				$twt_margin = $totwith/2;
 				$youtube_user = (isset($sfsi_section4_options['sfsi_youtube_user']) && !empty($sfsi_section4_options['sfsi_youtube_user'])) ? $sfsi_section4_options['sfsi_youtube_user'] : 'SpecificFeeds';
 				$visit_icon = $visit_iconsUrl."youtube.png";
 				
-				$url = isset($sfsi_section2_options['sfsi_youtube_pageUrl']) && !empty($sfsi_section2_options['sfsi_youtube_pageUrl']) ? $sfsi_section2_options['sfsi_youtube_pageUrl'] : 'javascript:void(0);';
+				$url = isset($sfsi_section2_options['sfsi_youtube_pageUrl']) && !empty($sfsi_section2_options['sfsi_youtube_pageUrl']) ? $sfsi_section2_options['sfsi_youtube_pageUrl'] : '';
 				
 				//Giving alternative text to image
 				if(!empty($sfsi_section5_options['sfsi_youtube_MouseOverText']))
@@ -856,11 +863,10 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
 				 
 				/* check for icons to display */
 				$hoverdiv="";
-				
-				$follow = isset($sfsi_section2_options['sfsi_youtube_pageUrl']) && !empty($sfsi_section2_options['sfsi_youtube_pageUrl']) ? $sfsi_section2_options['sfsi_youtube_pageUrl'] : false;
+
+				$follow = isset($sfsi_section2_options['sfsi_youtube_follow']) && !empty($sfsi_section2_options['sfsi_youtube_follow']) ? $sfsi_section2_options['sfsi_youtube_follow'] : false;
 
 				$ypage  = isset($sfsi_section2_options['sfsi_youtube_page']) && !empty($sfsi_section2_options['sfsi_youtube_page']) ? $sfsi_section2_options['sfsi_youtube_page'] : false;
-
 
 				if(false != $follow && $follow=="yes")
 				{
@@ -922,7 +928,6 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
 				$width 		 = 73;
 				$totwith 	 = $width+28+$icons_space;
 				$twt_margin  = $totwith/2;
-				$socialObj   = new sfsi_SocialHelper();			 
 				$toolClass   = "printst_tool_bdr";
 				$arrow_class = "bot_pintst_arow";
 				
@@ -932,7 +937,7 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
 											? $sfsi_section4_options['sfsi_pinterest_board'] : '';
 											
 				$visit_icon = $visit_iconsUrl."pinterest.png";
-		        $url = (isset($sfsi_section2_options['sfsi_pinterest_pageUrl'])) ? $sfsi_section2_options['sfsi_pinterest_pageUrl'] : 'javascript:void(0);';
+		        $url = (isset($sfsi_section2_options['sfsi_pinterest_pageUrl'])) ? $sfsi_section2_options['sfsi_pinterest_pageUrl'] : '';
                 
 				//Giving alternative text to image
 				if(isset($sfsi_section5_options['sfsi_pinterest_MouseOverText']) && !empty($sfsi_section5_options['sfsi_pinterest_MouseOverText']))
@@ -1012,9 +1017,8 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
 		case "instagram" :		 
 				$toolClass = "instagram_tool_bdr";
 				$arrow_class = "bot_pintst_arow";
-				$socialObj = new sfsi_SocialHelper();
 				
-				$url = (isset($sfsi_section2_options['sfsi_instagram_pageUrl'])) ? $sfsi_section2_options['sfsi_instagram_pageUrl'] : 'javascript:void(0);';
+				$url = (isset($sfsi_section2_options['sfsi_instagram_pageUrl'])) ? $sfsi_section2_options['sfsi_instagram_pageUrl'] : '';
 				
 				$instagram_user_name = isset($sfsi_section4_options['sfsi_instagram_User']) && !empty($sfsi_section4_options['sfsi_instagram_User']) ? $sfsi_section4_options['sfsi_instagram_User'] : false;
 				
@@ -1075,7 +1079,6 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
         
 		case "linkedin" :
 				$width = 66;
-				$socialObj = new sfsi_SocialHelper();		
 				$toolClass = "linkedin_tool_bdr";
 				$arrow_class = "bot_linkedin_arow";                
 				
@@ -1095,7 +1098,7 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
 				$visit_icon 		= $visit_iconsUrl."linkedIn.png";
 				
 				/*check for icons to display */     
-				$url = isset($sfsi_section2_options['sfsi_linkedin_pageURL']) && !empty($sfsi_section2_options['sfsi_linkedin_pageURL']) ? $sfsi_section2_options['sfsi_linkedin_pageURL'] : 'javascript:void(0);';         
+				$url = isset($sfsi_section2_options['sfsi_linkedin_pageURL']) && !empty($sfsi_section2_options['sfsi_linkedin_pageURL']) ? $sfsi_section2_options['sfsi_linkedin_pageURL'] : '';         
 		     	
 				if($follow =="yes" || $share =="yes" || $reBusiness =="yes")
                 {
@@ -1121,11 +1124,11 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
 					 }
                  }
 
-				$cFrom  = isset($sfsi_section2_options['sfsi_linkedIn_countsFrom']) && !empty($sfsi_section2_options['sfsi_linkedIn_countsFrom']) ? $sfsi_section2_options['sfsi_linkedIn_countsFrom'] : false;
+				$cFrom  = isset($sfsi_section4_options['sfsi_linkedIn_countsFrom']) && !empty($sfsi_section4_options['sfsi_linkedIn_countsFrom']) ? $sfsi_section4_options['sfsi_linkedIn_countsFrom'] : false;
 
-				$disp  = isset($sfsi_section2_options['sfsi_linkedIn_countsDisplay']) && !empty($sfsi_section2_options['sfsi_linkedIn_countsDisplay']) ? $sfsi_section2_options['sfsi_linkedIn_countsDisplay'] : false;
+				$disp  = isset($sfsi_section4_options['sfsi_linkedIn_countsDisplay']) && !empty($sfsi_section4_options['sfsi_linkedIn_countsDisplay']) ? $sfsi_section4_options['sfsi_linkedIn_countsDisplay'] : false;
 
-				$dcount  = isset($sfsi_section2_options['sfsi_display_counts']) && !empty($sfsi_section2_options['sfsi_display_counts']) ? $sfsi_section2_options['sfsi_display_counts'] : false;
+				$dcount  = isset($sfsi_section4_options['sfsi_display_counts']) && !empty($sfsi_section4_options['sfsi_display_counts']) ? $sfsi_section4_options['sfsi_display_counts'] : false;
 
                  /* fecth no of counts if active in admin section */   
 				 if($disp=="yes" &&$dcount=="yes")
@@ -1200,12 +1203,12 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
 				}
 				
 				$custom_icon_urls = unserialize($sfsi_section2_options['sfsi_CustomIcon_links']);
-				$url = (isset($custom_icon_urls[$icon_n]) && !empty($custom_icon_urls[$icon_n])) ? $custom_icon_urls[$icon_n]:'javascript:void(0);'; 
+				$url = (isset($custom_icon_urls[$icon_n]) && !empty($custom_icon_urls[$icon_n])) ? $custom_icon_urls[$icon_n]:''; 
 				$toolClass = "custom_lkn";
 				$arrow_class = "";
 				$custom_icons_hoverTxt = unserialize($sfsi_section5_options['sfsi_custom_MouseOverTexts']);
 				$icons = unserialize($sfsi_section1_options['sfsi_custom_files']);
-				$icon = $icons[$icon_n]; 
+				$icon = isset($icons[$icon_n])?$icons[$icon_n]:''; 
 				
 				//Giving alternative text to image
 				if(!empty($custom_icons_hoverTxt[$icon_n]))
@@ -1218,8 +1221,7 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
 				}
             break;    
     }
-    $icons="";
-    
+    $icons="";    
 	/* apply size of icon */
     if($is_front==0)
     {
@@ -1296,8 +1298,6 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
 	{
 		$margin_bot = "30px;";
     }
-    
-	
     if(isset($icon) && !empty($icon) && filter_var($icon, FILTER_VALIDATE_URL))
 	{
 		$icons.= "<div style='width:".$icon_width."px; height:".$icon_width."px;margin-left:".$icons_space."px;margin-bottom:".$margin_bot."' class='".$itemselector." ".$cmcls."'>";
@@ -1307,12 +1307,10 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
 				$icons.= "<a class='".$class." sficn' effect='".$mouse_hover_effect."' $new_window  href='".$url."' id='sfsiid_".$icon_name."' alt='".$alt_text."' style='opacity:".$icon_opacity."' >";     
 					$icons.= "<img alt='".$alt_text."' title='".$alt_text."' src='".$icon."' width='".$icons_size."' height='".$icons_size."' style='".$border_radius.$padding_top."' class='sfcm sfsi_wicon' effect='".$mouse_hover_effect."'   />"; 
 				$icons.= '</a>';
-	   
 	   if(isset($counts) &&  $counts!='')
 	   {
 			$icons.= '<span class="bot_no '.$bt_class.'">'.$counts.'</span>';  
-	   }
-		 
+	   }	
 	   if($hoverSHow && !empty($hoverdiv))
 	   {	
 			$icons.= '<div class="sfsi_tool_tip_2 '.$toolClass.' '.$toolT_cls.'" style="width:'.$width.'px ;opacity:0;z-index:-1;margin-left:-'.$twt_margin.'px;" id="sfsiid_'.$icon_name.'">';
@@ -1321,7 +1319,7 @@ function sfsi_prepairIcons($icon_name,$is_front=0)
 			$icons.= "</div>";
 	   }
 	   $icons.="</div>";
-	   $icons.="</div>";
+	   $icons.="</div>";	   
 	}
    return  $icons;       
 }
