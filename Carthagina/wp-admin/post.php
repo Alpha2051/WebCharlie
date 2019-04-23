@@ -16,6 +16,7 @@ $submenu_file = 'edit.php';
 
 wp_reset_vars( array( 'action' ) );
 
+<<<<<<< HEAD
 if ( isset( $_GET['post'] ) && isset( $_POST['post_ID'] ) && (int) $_GET['post'] !== (int) $_POST['post_ID'] ) {
 	wp_die( __( 'A post ID mismatch has been detected.' ), __( 'Sorry, you are not allowed to edit this item.' ), 400 );
 } elseif ( isset( $_GET['post'] ) ) {
@@ -25,6 +26,16 @@ if ( isset( $_GET['post'] ) && isset( $_POST['post_ID'] ) && (int) $_GET['post']
 } else {
 	$post_id = $post_ID = 0;
 }
+=======
+if ( isset( $_GET['post'] ) && isset( $_POST['post_ID'] ) && (int) $_GET['post'] !== (int) $_POST['post_ID'] )
+	wp_die( __( 'A post ID mismatch has been detected.' ), __( 'Sorry, you are not allowed to edit this item.' ), 400 );
+elseif ( isset( $_GET['post'] ) )
+ 	$post_id = $post_ID = (int) $_GET['post'];
+elseif ( isset( $_POST['post_ID'] ) )
+ 	$post_id = $post_ID = (int) $_POST['post_ID'];
+else
+ 	$post_id = $post_ID = 0;
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 /**
  * @global string  $post_type
@@ -46,7 +57,11 @@ if ( isset( $_POST['post_type'] ) && $post && $post_type !== $_POST['post_type']
 	wp_die( __( 'A post type mismatch has been detected.' ), __( 'Sorry, you are not allowed to edit this item.' ), 400 );
 }
 
+<<<<<<< HEAD
 if ( isset( $_POST['deletepost'] ) ) {
+=======
+if ( isset( $_POST['deletepost'] ) )
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 	$action = 'delete';
 } elseif ( isset( $_POST['wp-preview'] ) && 'dopreview' == $_POST['wp-preview'] ) {
 	$action = 'preview';
@@ -201,9 +216,15 @@ switch ( $action ) {
 	case 'editattachment':
 		check_admin_referer( 'update-post_' . $post_id );
 
+<<<<<<< HEAD
 		// Don't let these be changed
 		unset( $_POST['guid'] );
 		$_POST['post_type'] = 'attachment';
+=======
+	// Update the thumbnail filename
+	$newmeta = wp_get_attachment_metadata( $post_id, true );
+	$newmeta['thumb'] = wp_basename( $_POST['thumb'] );
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 		// Update the thumbnail filename
 		$newmeta          = wp_get_attachment_metadata( $post_id, true );

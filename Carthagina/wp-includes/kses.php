@@ -187,7 +187,11 @@ if ( ! CUSTOM_TAGS ) {
 			'lang'     => true,
 			'xml:lang' => true,
 		),
+<<<<<<< HEAD
 		'h1'         => array(
+=======
+		'h1' => array(
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 			'align' => true,
 		),
 		'h2'         => array(
@@ -750,8 +754,13 @@ function wp_kses( $string, $allowed_html, $allowed_protocols = array() ) {
  * @return string Filtered attribute.
  */
 function wp_kses_one_attr( $string, $element ) {
+<<<<<<< HEAD
 	$uris              = wp_kses_uri_attributes();
 	$allowed_html      = wp_kses_allowed_html( 'post' );
+=======
+	$uris = wp_kses_uri_attributes();
+	$allowed_html = wp_kses_allowed_html( 'post' );
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 	$allowed_protocols = wp_allowed_protocols();
 	$string            = wp_kses_no_null( $string, array( 'slash_zero' => 'keep' ) );
 
@@ -851,6 +860,7 @@ function wp_kses_allowed_html( $context = '' ) {
 				$tags = $allowedposttags;
 
 				$tags['form'] = array(
+<<<<<<< HEAD
 					'action'         => true,
 					'accept'         => true,
 					'accept-charset' => true,
@@ -858,6 +868,15 @@ function wp_kses_allowed_html( $context = '' ) {
 					'method'         => true,
 					'name'           => true,
 					'target'         => true,
+=======
+					'action' => true,
+					'accept' => true,
+					'accept-charset' => true,
+					'enctype' => true,
+					'method' => true,
+					'name' => true,
+					'target' => true,
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 				);
 
 				/** This filter is documented in wp-includes/kses.php */
@@ -998,7 +1017,11 @@ function wp_kses_uri_attributes() {
 }
 
 /**
+<<<<<<< HEAD
  * Callback for `wp_kses_split()`.
+=======
+ * Callback for wp_kses_split.
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
  *
  * @since 3.1.0
  * @access private
@@ -1224,7 +1247,11 @@ function wp_kses_hair( $attr, $allowed_protocols ) {
 	$attrarr  = array();
 	$mode     = 0;
 	$attrname = '';
+<<<<<<< HEAD
 	$uris     = wp_kses_uri_attributes();
+=======
+	$uris = wp_kses_uri_attributes();
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 	// Loop through the whole attribute list
 

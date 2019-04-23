@@ -1024,9 +1024,16 @@ function _get_meta_table( $type ) {
  *
  * @since 3.1.3
  *
+<<<<<<< HEAD
  * @param string      $meta_key  Meta key.
  * @param string|null $meta_type Optional. Type of object metadata is for (e.g., comment, post, term, or user).
  * @return bool Whether the meta key is considered protected.
+=======
+ * @param string      $meta_key  Meta key
+ * @param string|null $meta_type Optional. Type of object metadata is for (e.g., comment, post,
+ *                               term, or user).
+ * @return bool True if the key is protected, false otherwise.
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
  */
 function is_protected_meta( $meta_key, $meta_type = null ) {
 	$protected = ( '_' == $meta_key[0] );
@@ -1036,9 +1043,15 @@ function is_protected_meta( $meta_key, $meta_type = null ) {
 	 *
 	 * @since 3.2.0
 	 *
+<<<<<<< HEAD
 	 * @param bool        $protected Whether the key is considered protected.
 	 * @param string      $meta_key  Meta key.
 	 * @param string|null $meta_type Type of object metadata is for (e.g., comment, post, term, or user).
+=======
+	 * @param bool   $protected Whether the key is protected. Default false.
+	 * @param string $meta_key  Meta key.
+	 * @param string $meta_type Type of object metadata is for (e.g., comment, post, term, or user).
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 	 */
 	return apply_filters( 'is_protected_meta', $protected, $meta_key, $meta_type );
 }

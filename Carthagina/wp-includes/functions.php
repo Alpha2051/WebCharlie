@@ -2574,7 +2574,11 @@ function wp_check_filetype_and_ext( $file, $filename, $mimes = null ) {
 		 */
 		if ( in_array( $real_mime, $nonspecific_types, true ) ) {
 			// File is a non-specific binary type. That's ok if it's a type that generally tends to be binary.
+<<<<<<< HEAD
 			if ( ! in_array( substr( $type, 0, strcspn( $type, '/' ) ), array( 'application', 'video', 'audio' ) ) ) {
+=======
+			if ( !in_array( substr( $type, 0, strcspn( $type, '/' ) ), array( 'application', 'video', 'audio' ) ) ) {
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 				$type = $ext = false;
 			}
 		} elseif ( 0 === strpos( $real_mime, 'video/' ) || 0 === strpos( $real_mime, 'audio/' ) ) {
@@ -2583,6 +2587,7 @@ function wp_check_filetype_and_ext( $file, $filename, $mimes = null ) {
 			 * This means that common mismatches are forgiven: application/vnd.apple.numbers is often misidentified as application/zip,
 			 * and some media files are commonly named with the wrong extension (.mov instead of .mp4)
 			 */
+<<<<<<< HEAD
 			if ( substr( $real_mime, 0, strcspn( $real_mime, '/' ) ) !== substr( $type, 0, strcspn( $type, '/' ) ) ) {
 				$type = $ext = false;
 			}
@@ -2626,6 +2631,25 @@ function wp_check_filetype_and_ext( $file, $filename, $mimes = null ) {
 	}
 
 	// The mime type must be allowed
+=======
+
+			if ( substr( $real_mime, 0, strcspn( $real_mime, '/' ) ) !== substr( $type, 0, strcspn( $type, '/' ) ) ) {
+				$type = $ext = false;
+			}
+		} else {
+			if ( $type !== $real_mime ) {
+				/*
+				 * Everything else including image/* and application/*: 
+				 * If the real content type doesn't match the file extension, assume it's dangerous.
+				 */
+				$type = $ext = false;
+			}
+
+		}
+	}
+
+	// The mime type must be allowed 
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 	if ( $type ) {
 		$allowed = get_allowed_mime_types();
 

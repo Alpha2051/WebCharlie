@@ -188,6 +188,60 @@
 	width: 36%;
 }
 
+<<<<<<< HEAD
+=======
+.try-gutenberg-panel .try-gutenberg-panel-column-container {
+	display: flex;
+	margin-bottom: 13px;
+}
+
+@supports (display: grid) {
+	.try-gutenberg-panel .try-gutenberg-panel-column-container {
+		display: -ms-grid;
+		display: grid;
+		-ms-grid-columns: 36% 32% 32%;
+		grid-template-columns: 36% 32% 32%;
+	}
+}
+
+.try-gutenberg-panel .try-gutenberg-panel-image-column {
+	width: 36%;
+}
+
+@supports (display: grid) {
+	.try-gutenberg-panel .try-gutenberg-panel-image-column {
+		width: auto;
+	}
+}
+
+.try-gutenberg-panel .try-gutenberg-panel-column:not(.try-gutenberg-panel-image-column) {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 32%;
+}
+
+@supports (display: grid) {
+	.try-gutenberg-panel .try-gutenberg-panel-column:not(.try-gutenberg-panel-image-column) {
+		display: -ms-grid;
+		display: grid;
+		-ms-grid-rows: auto 100px;
+		grid-template-rows: auto 100px;
+		width: auto;
+	}
+}
+
+.try-gutenberg-panel .try-gutenberg-action {
+	height: 100px;
+}
+
+@supports (display: grid) {
+	.try-gutenberg-panel .try-gutenberg-action {
+		height: auto;
+	}
+}
+
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 .welcome-panel-column p.hide-if-no-customize {
 	margin-top: 10px;
 }
@@ -1234,6 +1288,30 @@ a.rsswidget {
 	}
 }
 
+<<<<<<< HEAD
+=======
+@media screen and (max-width: 1024px) {
+	.try-gutenberg-panel .try-gutenberg-panel-column-container {
+		-ms-grid-columns: 50% 50%;
+		grid-template-columns: 50% 50%;
+	}
+
+	.try-gutenberg-panel .try-gutenberg-panel-image-column {
+		display: none;
+	}
+
+	.try-gutenberg-panel .try-gutenberg-panel-column:not(.try-gutenberg-panel-image-column) {
+		width: 50%;
+	}
+
+	@supports (display: grid) {
+		.try-gutenberg-panel .try-gutenberg-panel-column:not(.try-gutenberg-panel-image-column) {
+			width: auto;
+		}
+	}
+}
+
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 @media screen and (max-width: 870px) {
 	.welcome-panel .welcome-panel-column,
 	.welcome-panel .welcome-panel-column:first-child {
@@ -1242,6 +1320,24 @@ a.rsswidget {
 		width: 100%;
 	}
 
+<<<<<<< HEAD
+=======
+	.try-gutenberg-panel .try-gutenberg-panel-column-container {
+		flex-wrap: wrap;
+	}
+
+	@supports (display: grid) {
+		.try-gutenberg-panel .try-gutenberg-panel-column-container {
+			-ms-grid-columns: 100%;
+			grid-template-columns: 100%;
+		}
+	}
+
+	.try-gutenberg-panel .try-gutenberg-panel-column:not(.try-gutenberg-panel-image-column) {
+		width: 100%;
+	}
+
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 	.welcome-panel .welcome-panel-column li {
 		display: inline-block;
 		margin-left: 13px;

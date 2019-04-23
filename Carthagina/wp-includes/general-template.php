@@ -2880,7 +2880,11 @@ function wp_no_robots() {
  *
  * Typical usage is as a wp_head callback. add_action( 'wp_head', 'wp_sensitive_page_meta' );
  *
+<<<<<<< HEAD
  * @since 5.0.1
+=======
+ * @since 5.0.0
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
  */
 function wp_sensitive_page_meta() {
 	?>

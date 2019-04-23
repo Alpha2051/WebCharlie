@@ -198,7 +198,11 @@ function _wp_translate_postdata( $update = false, $post_data = null ) {
 /**
  * Returns only allowed post data fields
  *
+<<<<<<< HEAD
  * @since 5.0.1
+=======
+ * @since 4.9.9
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
  *
  * @param array $post_data Array of post data. Defaults to the contents of $_POST.
  * @return object|bool WP_Error on failure, true on success.
@@ -293,7 +297,10 @@ function edit_post( $post_data = null ) {
 	$post_data = _wp_translate_postdata( true, $post_data );
 	if ( is_wp_error( $post_data ) ) {
 		wp_die( $post_data->get_error_message() );
+<<<<<<< HEAD
 	}
+=======
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 	$translated = _wp_get_allowed_postdata( $post_data );
 
 	// Post Formats
@@ -395,6 +402,11 @@ function edit_post( $post_data = null ) {
 			if ( $tax_object && isset( $tax_object->meta_box_sanitize_cb ) ) {
 				$translated['tax_input'][ $taxonomy ] = call_user_func_array( $tax_object->meta_box_sanitize_cb, array( $taxonomy, $terms ) );
 			}
+<<<<<<< HEAD
+=======
+
+			$translated['tax_input'][ $taxonomy ] = $clean_terms;
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 		}
 	}
 
@@ -592,7 +604,11 @@ function bulk_edit_posts( $post_data = null ) {
 		}
 
 		$post_data['post_ID']        = $post_ID;
+<<<<<<< HEAD
 		$post_data['post_type']      = $post->post_type;
+=======
+		$post_data['post_type'] = $post->post_type;
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 		$post_data['post_mime_type'] = $post->post_mime_type;
 
 		foreach ( array( 'comment_status', 'ping_status', 'post_author' ) as $field ) {
@@ -610,6 +626,10 @@ function bulk_edit_posts( $post_data = null ) {
 
 		if ( isset( $shared_post_data['post_format'] ) ) {
 			set_post_format( $post_ID, $shared_post_data['post_format'] );
+<<<<<<< HEAD
+=======
+			unset( $post_data['tax_input']['post_format'] );
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 		}
 
 		// Prevent wp_insert_post() from overwriting post format with the old data.
@@ -827,12 +847,19 @@ function wp_write_post() {
 	$translated = _wp_translate_postdata( false );
 	if ( is_wp_error( $translated ) ) {
 		return $translated;
+<<<<<<< HEAD
 	}
+=======
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 	$translated = _wp_get_allowed_postdata( $translated );
 
 	// Create the post.
 	$post_ID = wp_insert_post( $translated );
+<<<<<<< HEAD
 	if ( is_wp_error( $post_ID ) ) {
+=======
+	if ( is_wp_error( $post_ID ) )
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 		return $post_ID;
 	}
 
@@ -1796,7 +1823,10 @@ function wp_create_post_autosave( $post_data ) {
 	$post_data = _wp_translate_postdata( true, $post_data );
 	if ( is_wp_error( $post_data ) ) {
 		return $post_data;
+<<<<<<< HEAD
 	}
+=======
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 	$post_data = _wp_get_allowed_postdata( $post_data );
 
 	$post_author = get_current_user_id();

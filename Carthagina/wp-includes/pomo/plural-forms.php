@@ -206,7 +206,11 @@ class Plural_Forms {
 					if ( $next >= '0' && $next <= '9' ) {
 						$span     = strspn( $str, self::NUM_CHARS, $pos );
 						$output[] = array( 'value', intval( substr( $str, $pos, $span ) ) );
+<<<<<<< HEAD
 						$pos     += $span;
+=======
+						$pos += $span;
+>>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 						break;
 					}
 
