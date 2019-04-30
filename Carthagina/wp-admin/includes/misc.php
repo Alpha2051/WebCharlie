@@ -1618,11 +1618,7 @@ final class WP_Privacy_Policy_Content {
 	 * @since 4.9.6
 	 * @since 5.0.0 The $post parameter is now optional.
 	 *
-<<<<<<< HEAD
 	 * @param WP_Post|null $post The currently edited post. Default null.
-=======
-	 * @param WP_Post $post The currently edited post.
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 	 */
 	public static function notice( $post = null ) {
 		$post = get_post( $post );

@@ -18,7 +18,6 @@
  * @package WordPress
  */
 
-<<<<<<< HEAD
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 define( 'DB_NAME', 'database_name_here' );
@@ -28,17 +27,6 @@ define( 'DB_USER', 'username_here' );
 
 /** MySQL database password */
 define( 'DB_PASSWORD', 'password_here' );
-=======
-// ** Réglages MySQL - Votre hébergeur doit vous fournir ces informations. ** //
-/** Nom de la base de données de WordPress. */
-define('DB_NAME', 'votre_nom_de_bdd');
-
-/** Utilisateur de la base de données MySQL. */
-define('DB_USER', 'votre_utilisateur_de_bdd');
-
-/** Mot de passe de la base de données MySQL. */
-define('DB_PASSWORD', 'votre_mdp_de_bdd');
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 /** MySQL hostname */
 define( 'DB_HOST', 'localhost' );

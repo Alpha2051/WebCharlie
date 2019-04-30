@@ -2,11 +2,7 @@
 # This file is distributed under the same license as the WordPress - 5.1.x - Development package.
 msgid ""
 msgstr ""
-<<<<<<< HEAD
 "PO-Revision-Date: 2019-03-08 03:27:27+0000\n"
-=======
-"PO-Revision-Date: 2018-12-13 06:04:15+0000\n"
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,32 +11,12 @@ msgstr ""
 "Language: fr\n"
 "Project-Id-Version: WordPress - 5.1.x - Development\n"
 
-<<<<<<< HEAD
 #. translators: Translate this to the correct language tag for your locale, *
 #. see https://www.w3.org/International/articles/language-tags/ for reference.
 #. * Do not translate into your own language.
 #: wp-includes/general-template.php:720
 msgid "html_lang_attribute"
 msgstr "fr-FR"
-=======
-#: wp-includes/class-wp.php:293 wp-includes/ms-deprecated.php:275
-#: wp-includes/ms-deprecated.php:294
-msgid "Sorry, you are not allowed to view this item."
-msgstr "Désolé, vous n’avez pas l’autorisation de voir cet élément."
-
-#: wp-includes/class-wp.php:293 wp-includes/ms-deprecated.php:275
-#: wp-includes/ms-deprecated.php:294
-msgid "A variable mismatch has been detected."
-msgstr "Une incohérence de variables a été détectée."
-
-#: wp-activate.php:30
-msgid "A key value mismatch has been detected. Please follow the link provided in your activation email."
-msgstr "Une incohérence de valeur de clé a été détectée. Veuillez suivre le lien fourni dans l’e-mail d’activation."
-
-#: wp-signup.php:184
-msgid "No"
-msgstr "Non"
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #. translators: 'rtl' or 'ltr'. This sets the text direction for WordPress.
 #: wp-includes/class-wp-locale.php:221
@@ -5219,7 +5195,6 @@ msgstr ""
 msgid "Suggested image dimensions: %1$s by %2$s pixels."
 msgstr "Dimensions suggérées de l’image : %1$s par %2$s pixels."
 
-<<<<<<< HEAD
 #: wp-includes/script-loader.php:1066 wp-includes/functions.php:2345
 #: wp-includes/js/dist/editor.js:22459
 msgid "Sorry, this file type is not permitted for security reasons."
@@ -5228,15 +5203,6 @@ msgstr "Désolé, ce type de fichier n’est pas autorisé pour des raisons de s
 #: wp-includes/comment.php:3200
 msgid "Sorry, comments are not allowed for this item."
 msgstr "Désolé, les commentaires ne sont pas autorisés pour cet élément."
-=======
-#: wp-includes/ms-deprecated.php:404
-msgid "<strong>ERROR</strong>: Site URL already taken."
-msgstr "<strong>ERREUR</strong> : cette adresse de site est déjà prise."
-
-#: wp-includes/ms-deprecated.php:411
-msgid "<strong>ERROR</strong>: problem creating site entry."
-msgstr "<strong>ERREUR</strong> : problème lors de la création de l’entrée du site."
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #: wp-includes/class-wp-oembed-controller.php:146
 msgid "Sorry, you are not allowed to make proxied oEmbed requests."
@@ -8378,7 +8344,6 @@ msgctxt "September abbreviation"
 msgid "Sep"
 msgstr "Sep"
 
-<<<<<<< HEAD
 #. translators: three-letter abbreviation of the month
 #: wp-includes/class-wp-locale.php:183
 msgctxt "August abbreviation"
@@ -8450,70 +8415,6 @@ msgstr "J"
 msgctxt "Wednesday initial"
 msgid "W"
 msgstr "M"
-=======
-#. translators: %s: site name
-#: wp-includes/functions.php:2645
-msgid "You are attempting to log out of %s"
-msgstr "Vous êtes en train de vous déconnecter de %s."
-
-#. translators: %s: logout URL
-#: wp-includes/functions.php:2652
-msgid "Do you really want to <a href=\"%s\">log out</a>?"
-msgstr "Voulez-vous réellement <a href=\"%s\">vous déconnecter</a> ?"
-
-#: wp-includes/functions.php:2661 wp-includes/ms-functions.php:2047
-msgid "Please try again."
-msgstr "Veuillez réessayer."
-
-#: wp-includes/functions.php:2786
-msgid "&laquo; Back"
-msgstr "« Retour"
-
-#: wp-load.php:92 wp-includes/functions.php:2798
-msgid "WordPress &rsaquo; Error"
-msgstr "WordPress » Erreur"
-
-#. translators: 1: PHP function name, 2: version number, 3: alternative
-#. function name
-#. translators: 1: PHP file name, 2: version number, 3: alternative file name
-#. translators: 1: WordPress hook name, 2: version number, 3: alternative hook
-#. name
-#: wp-includes/functions.php:3888 wp-includes/functions.php:4016
-#: wp-includes/functions.php:4139
-msgid "%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead."
-msgstr "%1$s est <strong>obsolète</strong> depuis la version %2$s ! Utilisez %3$s à la place."
-
-#. translators: 1: PHP function name, 2: version number
-#. translators: 1: PHP file name, 2: version number
-#. translators: 1: WordPress hook name, 2: version number
-#: wp-includes/functions.php:3891 wp-includes/functions.php:4019
-#: wp-includes/functions.php:4142
-msgid "%1$s is <strong>deprecated</strong> since version %2$s with no alternative available."
-msgstr "%1$s est <strong>obsolète</strong> depuis la version %2$s, aucune alternative n’est disponible."
-
-#. translators: 1: PHP function name, 2: version number, 3: optional message
-#. regarding the change
-#: wp-includes/functions.php:4080
-msgid "%1$s was called with an argument that is <strong>deprecated</strong> since version %2$s! %3$s"
-msgstr "%1$s est appelé avec un argument qui est <strong>obsolète</strong> depuis la version %2$s ! %3$s"
-
-#. translators: 1: PHP function name, 2: version number
-#: wp-includes/functions.php:4083
-msgid "%1$s was called with an argument that is <strong>deprecated</strong> since version %2$s with no alternative available."
-msgstr "%1$s est appelé avec un argument qui est <strong>obsolète</strong> depuis la version %2$s, aucune alternative n’est disponible."
-
-#: wp-includes/functions.php:4719
-msgid "Select a city"
-msgstr "Sélectionner une ville"
-
-#: wp-includes/functions.php:4764 wp-includes/functions.php:4768
-msgid "UTC"
-msgstr "UTC"
-
-#: wp-includes/functions.php:4772
-msgid "Manual Offsets"
-msgstr "Décalages manuels"
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #. translators: one-letter abbreviation of the weekday
 #: wp-includes/class-wp-locale.php:132
@@ -8593,7 +8494,6 @@ msgstr "Embarquez une publication WordPress."
 msgid "When in reorder mode, additional controls to reorder widgets will be available in the widgets list above."
 msgstr "Une fois en mode de réorganisation, des options de contrôle supplémentaires pour réorganiser vos widgets apparaîtront dans la liste des widgets ci-dessus."
 
-<<<<<<< HEAD
 #: wp-includes/class-wp-xmlrpc-server.php:6237
 msgid "Sorry, you have used your space allocation."
 msgstr "Désolé, vous avez utilisé votre espace alloué."
@@ -8602,19 +8502,6 @@ msgstr "Désolé, vous avez utilisé votre espace alloué."
 #: wp-includes/class-wp-xmlrpc-server.php:3697
 msgid "Sorry, you are not allowed to moderate or edit this comment."
 msgstr "Désolé, vous n’avez pas l’autorisation de modérer ou modifier ce commentaire."
-=======
-#: wp-includes/general-template.php:3734
-msgid "&laquo; Previous"
-msgstr "« Précédent"
-
-#: wp-includes/general-template.php:3735
-msgid "Next &raquo;"
-msgstr "Suivant »"
-
-#: wp-includes/class-wp-theme.php:781
-msgid "Gray"
-msgstr "Gris"
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #: wp-includes/class-wp-customize-widgets.php:789
 #: wp-includes/customize/class-wp-widget-area-customize-control.php:59
@@ -8833,15 +8720,9 @@ msgstr "%1$s (%2$d)"
 msgid "Previewing theme"
 msgstr "Prévisualisation du thème"
 
-<<<<<<< HEAD
 #: wp-includes/customize/class-wp-customize-themes-panel.php:42
 msgid "Active theme"
 msgstr "Thème actif"
-=======
-#: wp-includes/user.php:285 wp-includes/functions.php:5384
-msgid "Please log in again."
-msgstr "Veuillez vous reconnecter."
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #: wp-includes/class-wp-customize-nav-menus.php:596
 msgid "Menus can be displayed in locations defined by your theme."
@@ -9217,7 +9098,6 @@ msgstr "Nombre d’élément(s) trouvé(s) : %d"
 msgid "%s (Pending)"
 msgstr "%s (en attente)"
 
-<<<<<<< HEAD
 #. translators: %s: title of menu item which is invalid
 #: wp-includes/class-wp-customize-nav-menus.php:466
 msgid "%s (Invalid)"
@@ -9226,18 +9106,6 @@ msgstr "%s (non valide)"
 #: wp-includes/class-wp-customize-nav-menus.php:462
 msgid "Menu item is now a sub-item"
 msgstr "L’élément du menu est maintenant un sous-élément"
-=======
-#. translators: Developer debugging message. 1: PHP function name, 2:
-#. Explanatory message, 3: Version information message
-#: wp-includes/functions.php:4196
-msgid "%1$s was called <strong>incorrectly</strong>. %2$s %3$s"
-msgstr "%1$s est appelée de la mauvaise manière. %2$s %3$s"
-
-#. translators: %s: version number
-#: wp-includes/functions.php:4189
-msgid "(This message was added in version %s.)"
-msgstr "(Ce message a été ajouté à la version %s.)"
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #: wp-includes/class-wp-customize-nav-menus.php:461
 msgid "Menu item moved out of submenu"
@@ -9298,19 +9166,12 @@ msgstr "Classes CSS"
 msgid "Title Attribute"
 msgstr "Attribut de titre"
 
-<<<<<<< HEAD
 #: wp-includes/widgets/class-wp-widget-media-image.php:143
 #: wp-includes/media-template.php:1066
 #: wp-includes/customize/class-wp-customize-nav-menu-item-control.php:104
 #: wp-includes/class-wp-editor.php:1740
 msgid "Open link in a new tab"
 msgstr "Ouvrir le lien dans un nouvel onglet"
-=======
-#: wp-includes/general-template.php:3918
-msgctxt "admin color scheme"
-msgid "Blue"
-msgstr "Bleu"
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #: wp-includes/customize/class-wp-customize-nav-menu-item-control.php:97
 msgid "Navigation Label"
@@ -9320,7 +9181,6 @@ msgstr "Titre de la navigation"
 msgid "Automatically add new top-level pages to this menu"
 msgstr "Ajouter automatiquement les pages de premier niveau à ce menu"
 
-<<<<<<< HEAD
 #: wp-includes/class-wp-customize-nav-menus.php:451
 msgid "Menu Location"
 msgstr "Emplacements de menus"
@@ -9332,20 +9192,6 @@ msgstr "Supprimer le menu"
 #: wp-includes/customize/class-wp-customize-nav-menu-control.php:38
 msgid "Add Items"
 msgstr "Ajouter des éléments"
-=======
-#: wp-includes/functions.php:3823
-msgid "Database Error"
-msgstr "Erreur de la base de données"
-
-#: wp-includes/wp-db.php:1577 wp-includes/functions.php:3827
-#: wp-includes/ms-load.php:455
-msgid "Error establishing a database connection"
-msgstr "Erreur lors de la connexion à la base de données"
-
-#: wp-includes/general-template.php:3820 wp-includes/formatting.php:3361
-msgid "&hellip;"
-msgstr "&hellip;"
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #. translators: 1: error message, 2: line number
 #: wp-includes/atomlib.php:175
@@ -9787,35 +9633,10 @@ msgstr "Les valeurs suivantes ne décrivent pas une date valide : année %1$s, 
 msgid "Category: %s"
 msgstr "Catégorie : %s"
 
-<<<<<<< HEAD
 #. translators: Tag archive title. %s: Tag name
 #: wp-includes/general-template.php:1502
 msgid "Tag: %s"
 msgstr "Étiquette : %s"
-=======
-#. translators: 1: script name, 2: wp_enqueue_scripts
-#: wp-includes/functions.wp-scripts.php:230
-msgid "Do not deregister the %1$s script in the administration area. To target the front-end theme, use the %2$s hook."
-msgstr "Ne désenregistrez pas le script %1$s dans la zone d’administration. Pour cibler le thème public, utilisez le crochet %2$s."
-
-#: wp-includes/script-loader.php:569 wp-includes/functions.php:5383
-msgid "Session expired"
-msgstr "La session a expiré"
-
-#: wp-includes/general-template.php:212 wp-includes/general-template.php:220
-msgctxt "label"
-msgid "Search for:"
-msgstr "Rechercher :"
-
-#: wp-includes/general-template.php:215 wp-includes/general-template.php:222
-msgctxt "submit button"
-msgid "Search"
-msgstr "Rechercher"
-
-#: wp-includes/functions.php:5385
-msgid "The login page will open in a new window. After logging in you can close it and return to this page."
-msgstr "La page de connexion s’ouvrira dans une nouvelle fenêtre. Après votre connexion, vous pourrez la fermer et revenir à cette page."
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #. translators: Author archive title. %s: Author name
 #: wp-includes/general-template.php:1505
@@ -9907,7 +9728,6 @@ msgstr "Pas d’alignement"
 msgid "Change file"
 msgstr "Modifier le fichier"
 
-<<<<<<< HEAD
 #: wp-includes/customize/class-wp-customize-media-control.php:257
 msgid "No file selected"
 msgstr "Aucun fichier sélectionné"
@@ -9920,22 +9740,6 @@ msgstr "Choisissez un fichier"
 #: wp-includes/customize/class-wp-customize-media-control.php:248
 msgid "Select image"
 msgstr "Sélectionner une image"
-=======
-#: wp-includes/general-template.php:3901
-msgctxt "admin color scheme"
-msgid "Default"
-msgstr "Par défaut"
-
-#: wp-includes/general-template.php:3912
-msgctxt "admin color scheme"
-msgid "Light"
-msgstr "Lumineux"
-
-#: wp-includes/general-template.php:3924
-msgctxt "admin color scheme"
-msgid "Midnight"
-msgstr "Minuit"
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #: wp-includes/widgets/class-wp-widget-media-image.php:37
 #: wp-includes/customize/class-wp-customize-media-control.php:247
@@ -9946,7 +9750,6 @@ msgstr "Aucune image sélectionnée"
 msgid "Custom color"
 msgstr "Couleur personnalisée"
 
-<<<<<<< HEAD
 #: wp-includes/class-wp-editor.php:1164
 msgid "Color"
 msgstr "Couleur"
@@ -9964,27 +9767,6 @@ msgstr "Aucune couleur"
 msgctxt "list style"
 msgid "Default"
 msgstr "Par défaut"
-=======
-#: wp-includes/general-template.php:3930
-msgctxt "admin color scheme"
-msgid "Sunrise"
-msgstr "Lever du soleil"
-
-#: wp-includes/general-template.php:3936
-msgctxt "admin color scheme"
-msgid "Ectoplasm"
-msgstr "Ectoplasme"
-
-#: wp-includes/general-template.php:3942
-msgctxt "admin color scheme"
-msgid "Ocean"
-msgstr "Océan"
-
-#: wp-includes/general-template.php:3948
-msgctxt "admin color scheme"
-msgid "Coffee"
-msgstr "Café"
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #: wp-includes/admin-bar.php:819
 msgctxt "add new from admin bar"
@@ -10506,22 +10288,10 @@ msgctxt "find/replace"
 msgid "Next"
 msgstr "Suivant"
 
-<<<<<<< HEAD
 #: wp-includes/class-wp-editor.php:1174
 msgctxt "find/replace"
 msgid "Replace"
 msgstr "Remplacer"
-=======
-#. translators: 1: PHP class name, 2: version number, 3: __construct() method
-#: wp-includes/functions.php:3954
-msgid "The called constructor method for %1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead."
-msgstr "La méthode constructor appelée pour %1$s est <strong>obsolète</strong> depuis la version %2$s ! Veuillez utiliser %3$s à la place."
-
-#. translators: %s: Name of the directory (build)
-#: wp-includes/class-wp-locale.php:244
-msgid "The %s directory of the develop repository must be used for RTL."
-msgstr "Le répertoire %s du répertoire de développement doit être utilisé pour le RTL."
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #: wp-includes/class-wp-editor.php:1136
 #: wp-includes/js/dist/block-library.js:1664
@@ -10811,7 +10581,6 @@ msgstr "Montrer la liste des pistes"
 msgid "Back"
 msgstr "Retour"
 
-<<<<<<< HEAD
 #: wp-includes/customize/class-wp-customize-themes-section.php:84
 msgid "An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href=\"https://wordpress.org/support/\">support forums</a>."
 msgstr "Une erreur inattendue s’est produite. Quelque chose semble ne pas fonctionner avec WordPress.org ou la configuration de ce serveur. Si vous continuez à rencontrer des problèmes, veuillez essayer les <a href=\"https://wpfr.net/support\">forums de support</a>."
@@ -10819,16 +10588,6 @@ msgstr "Une erreur inattendue s’est produite. Quelque chose semble ne pas fonc
 #: wp-includes/media.php:3708
 msgid "Image Details"
 msgstr "Détails de l’image"
-=======
-#. translators: %s: Codex URL
-#: wp-includes/functions.php:4192
-msgid "Please see <a href=\"%s\">Debugging in WordPress</a> for more information."
-msgstr "Veuillez lire <a href=\"%s\">Débogage dans WordPress</a> (en) pour plus d’informations."
-
-#: wp-includes/functions.php:4193
-msgid "https://codex.wordpress.org/Debugging_in_WordPress"
-msgstr "https://codex.wordpress.org/fr:Débogage_dans_WordPress"
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #: wp-includes/script-loader.php:868 wp-includes/class-wp-editor.php:1275
 msgid "Insert Read More tag"
@@ -10884,7 +10643,6 @@ msgstr "Insérer un tableau"
 msgid "Row type"
 msgstr "Type de ligne"
 
-<<<<<<< HEAD
 #: wp-includes/class-wp-editor.php:1240
 msgid "Cell spacing"
 msgstr "Espacement entre les cellules"
@@ -10892,17 +10650,6 @@ msgstr "Espacement entre les cellules"
 #: wp-includes/class-wp-editor.php:1239
 msgid "Cell padding"
 msgstr "Marge intérieure des cellules"
-=======
-#. translators: 1: PHP class name, 2: PHP parent class name, 3: version number,
-#. 4: __construct() method
-#: wp-includes/functions.php:3950
-msgid "The called constructor method for %1$s in %2$s is <strong>deprecated</strong> since version %3$s! Use %4$s instead."
-msgstr "La méthode du constructeur appelée pour %1$s dans %2$s est <strong>obsolète</strong> depuis la version %3$s ! Utilisez %4$s à la place."
-
-#: wp-includes/functions.php:5368
-msgid "Close dialog"
-msgstr "Fermez la boîte de dialogue"
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #: wp-includes/class-wp-editor.php:1199
 msgid "Rows"
@@ -11385,7 +11132,6 @@ msgstr "#%d (pas de titre)"
 msgid "JavaScript must be enabled to use this feature."
 msgstr "JavaScript doit être activé pour utiliser cette fonctionnalité."
 
-<<<<<<< HEAD
 #. translators: Date/Time format, see https://secure.php.net/date
 #. translators: localized date and time format, see https://secure.php.net/date
 #: wp-includes/script-loader.php:152 wp-includes/script-loader.php:562
@@ -11406,45 +11152,6 @@ msgstr "G \\h i \\m\\i\\n"
 #: wp-includes/media.php:3234 wp-includes/class-wp-locale.php:382
 msgid "F j, Y"
 msgstr "j F Y"
-=======
-#: wp-includes/functions.php:5777
-msgid "Only UUID V4 is supported at this time."
-msgstr "Seul le système UUID v4 est reconnu à l’heure actuelle."
-
-#. translators: Do not translate OLD_EMAIL, NEW_EMAIL, SITENAME, SITEURL: those
-#. are placeholders.
-#: wp-includes/functions.php:5841
-msgid ""
-"Hi,\n"
-"\n"
-"This notice confirms that the admin email address was changed on ###SITENAME###.\n"
-"\n"
-"The new admin email address is ###NEW_EMAIL###.\n"
-"\n"
-"This email has been sent to ###OLD_EMAIL###\n"
-"\n"
-"Regards,\n"
-"All at ###SITENAME###\n"
-"###SITEURL###"
-msgstr ""
-"Bonjour,\n"
-"\n"
-"Cette notification pour vous confirmer que l’adresse e-mail de l’administrateur a été changé sur ###SITENAME###.\n"
-"\n"
-"La nouvelle adresse e-mail de l’administrateur est ###NEW_EMAIL###.\n"
-"\n"
-"Cet e-mail a été envoyé à ###OLD_EMAIL###.\n"
-"\n"
-"Cordialement,\n"
-"De la part de ###SITENAME###\n"
-"###SITEURL###"
-
-#. translators: Site admin email change notification email subject. %s: Site
-#. title
-#: wp-includes/functions.php:5856
-msgid "[%s] Notice of Admin Email Change"
-msgstr "[%s] Notification de changement de l’e-mail d’administration"
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #: wp-includes/class-wp-xmlrpc-server.php:503
 msgid "The URL to the admin area"
@@ -11485,15 +11192,9 @@ msgstr "Avez-vous correctement saisi votre adresse de messagerie ? Vous aviez s
 msgid "%1$s %2$s, %3$s @ %4$s:%5$s"
 msgstr "%2$s %1$s %3$s à %4$s h %5$s min"
 
-<<<<<<< HEAD
 #: wp-includes/script-loader.php:931
 msgid "Your session has expired. You can log in again from this page or go to the login page."
 msgstr "Votre session a expiré. Vous pouvez vous reconnecter depuis cette page ou aller à la page de connexion."
-=======
-#: wp-includes/functions.php:2656
-msgid "The link you followed has expired."
-msgstr "Le lien suivi est expiré."
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #: wp-includes/functions.php:5990
 msgid "The login page will open in a new tab. After logging in you can close it and return to this page."
@@ -11541,7 +11242,6 @@ msgstr "Ne désenregistrez pas le script %1$s dans la zone d’administration. P
 msgid "Site Address (URL)"
 msgstr "Adresse web du site (URL)"
 
-<<<<<<< HEAD
 #: wp-includes/class-wp-xmlrpc-server.php:488
 msgid "WordPress Address (URL)"
 msgstr "Adresse web de WordPress (URL)"
@@ -11553,23 +11253,11 @@ msgstr "Adresse web de WordPress (URL)"
 #: wp-includes/user.php:1894
 msgid "Invalid user ID."
 msgstr "Identifiant utilisateur non valide."
-=======
-#. translators: deleted text
-#: wp-includes/functions.php:5993
-msgid "[deleted]"
-msgstr "[supprimé]"
-
-#. translators: deleted long text
-#: wp-includes/functions.php:5997
-msgid "This content was deleted by the author."
-msgstr "Ce contenu a été supprimé par son auteur."
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #: wp-includes/media-template.php:519
 msgid "Caption this image&hellip;"
 msgstr "Décrivez cette image&hellip;"
 
-<<<<<<< HEAD
 #: wp-includes/media-template.php:802
 msgid "Random Order"
 msgstr "Ordre aléatoire"
@@ -11598,36 +11286,6 @@ msgstr "Aucun élément trouvé."
 #: wp-includes/media.php:3705
 msgid "Reverse order"
 msgstr "Inverser l’ordre"
-=======
-#: wp-activate.php:125
-msgid "Activation Key Required"
-msgstr "Clé d’activation requise"
-
-#: wp-activate.php:128
-msgid "Activation Key:"
-msgstr "Clé d’activation :"
-
-#: wp-activate.php:132 wp-includes/script-loader.php:841
-#: wp-includes/script-loader.php:842
-msgid "Activate"
-msgstr "Activer"
-
-#: wp-activate.php:140 wp-activate.php:174
-msgid "Your account is now active!"
-msgstr "Votre compte est maintenant activé !"
-
-#: wp-activate.php:30 wp-activate.php:165
-msgid "An error occurred during the activation"
-msgstr "Une erreur est survenue lors de l’activation."
-
-#: wp-activate.php:177 wp-signup.php:230
-msgid "Username:"
-msgstr "Identifiant :"
-
-#: wp-activate.php:178 wp-includes/post-template.php:1611
-msgid "Password:"
-msgstr "Mot de passe :"
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #: wp-includes/js/dist/editor.js:24951
 msgid "Set featured image"
@@ -11913,16 +11571,9 @@ msgstr "L’enregistrement de l’éditeur d’images a échoué."
 msgid "Image flip failed."
 msgstr "Le retournement de l’image a échoué."
 
-<<<<<<< HEAD
 #: wp-includes/class-wp-image-editor-gd.php:329
 msgid "Image rotate failed."
 msgstr "La rotation de l’image a échoué."
-=======
-#: wp-includes/admin-bar.php:830 wp-includes/class-wp-customize-widgets.php:412
-#: wp-includes/functions.php:3764
-msgid "Widgets"
-msgstr "Widgets"
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #: wp-includes/class-wp-image-editor-gd.php:303
 msgid "Image crop failed."
@@ -12402,16 +12053,9 @@ msgstr "Désolé, vous n’avez pas l’autorisation de créer des contenus priv
 msgid "Sorry, you are not allowed to create posts as this user."
 msgstr "Désolé, vous n’avez pas l’autorisation de créer des contenus sous cet identifiant."
 
-<<<<<<< HEAD
 #: wp-includes/class-wp-xmlrpc-server.php:1432
 msgid "Sorry, you are not allowed to create password protected posts in this post type."
 msgstr "Désolé, vous n’avez pas l’autorisation de créer des contenus protégés par mot de passe avec ce type de publication."
-=======
-#. translators: 1: login URL, 2: network home URL
-#: wp-activate.php:193
-msgid "Your account is now activated. <a href=\"%1$s\">Log in</a> or go back to the <a href=\"%2$s\">homepage</a>."
-msgstr "Votre compte est maintenant activé. <a href=\"%1$s\">Connectez-vous</a> ou retournez sur la <a href=\"%2$s\">page d’accueil de votre site</a>."
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #: wp-includes/class-wp-xmlrpc-server.php:1766
 #: wp-includes/class-wp-xmlrpc-server.php:5126
@@ -12424,16 +12068,9 @@ msgstr "Cette publication ne peut pas être supprimée."
 msgid "Sorry, you are not allowed to add a term to one of the given taxonomies."
 msgstr "Désolé, vous n’avez pas l’autorisation d’ajouter un terme à l’une des taxinomies indiquées."
 
-<<<<<<< HEAD
 #: wp-includes/class-wp-xmlrpc-server.php:1577
 msgid "Ambiguous term name used in a hierarchical taxonomy. Please use term ID instead."
 msgstr "Un nom de terme est ambigu pour cette taxonomie hiérarchisée. Veuillez utiliser l’identifiant du terme à la place."
-=======
-#. translators: 1: site URL, 2: login URL
-#: wp-activate.php:188
-msgid "Your account is now activated. <a href=\"%1$s\">View your site</a> or <a href=\"%2$s\">Log in</a>"
-msgstr "Votre compte est maintenant activé. <a href=\"%1$s\">Consultez votre site</a> ou <a href=\"%2$s\">connectez-vous</a>"
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #: wp-includes/class-wp-xmlrpc-server.php:3391
 msgid "Sorry, you are not allowed to delete this category."
@@ -12495,7 +12132,6 @@ msgctxt "apostrophe"
 msgid "&#8217;"
 msgstr "&rsquo;"
 
-<<<<<<< HEAD
 #. translators: closing curly double quote
 #: wp-includes/formatting.php:100
 msgctxt "closing curly double quote"
@@ -12515,17 +12151,6 @@ msgstr "Demander aux moteurs de recherche d’indexer ce site."
 #: wp-load.php:90
 msgid "Create a Configuration File"
 msgstr "Créer un fichier de configuration"
-=======
-#. translators: 1: site URL, 2: username, 3: user email, 4: lost password URL
-#: wp-activate.php:155
-msgid "Your site at %1$s is active. You may now log in to your site using your chosen username of &#8220;%2$s&#8221;. Please check your email inbox at %3$s for your password and login instructions. If you do not receive an email, please check your junk or spam folder. If you still do not receive an email within an hour, you can <a href=\"%4$s\">reset your password</a>."
-msgstr "Votre site est activé à %1$s. Vous pouvez dès maintenant vous connecter à ce site en utilisant l’identifiant choisi « %2$s ». Vous trouverez dans votre messagerie (sur %3$s) un message vous donnant votre mot de passe et identifiant, ainsi que les instructions pour vous connecter. Si vous ne recevez pas d’e-mail, pensez à consulter le dossier « indésirables » de votre client de messagerie. Si vous ne recevez pas votre mot de passe dans moins d’une heure, vous pouvez <a href=\"%4$s\">réinitialiser votre mot de passe</a>."
-
-#. translators: 1: login URL, 2: username, 3: user email, 4: lost password URL
-#: wp-activate.php:146
-msgid "Your account has been activated. You may now <a href=\"%1$s\">log in</a> to the site using your chosen username of &#8220;%2$s&#8221;. Please check your email inbox at %3$s for your password and login instructions. If you do not receive an email, please check your junk or spam folder. If you still do not receive an email within an hour, you can <a href=\"%4$s\">reset your password</a>."
-msgstr "Votre compte vient d’être activé. Vous pouvez dès maintenant vous <a href=\"%1$s\">connecter</a> à votre site en utilisant votre identifiant « %2$s ». Vous trouverez dans votre messagerie (sur %3$s) un message vous donnant votre mot de passe et identifiant, ainsi que les instructions pour vous connecter. Si vous ne recevez pas d’e-mail, pensez à consulter le dossier « spam » de votre client de messagerie. Si vous ne recevez pas votre mot de passe dans moins d’une heure, vous pouvez <a href=\"%4$s\">réinitialiser votre mot de passe</a>."
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
 
 #. translators: %s: wp-config.php
 #: wp-load.php:87
@@ -16383,7 +16008,6 @@ msgstr "Votre compte est maintenant activé !"
 msgid "Activate"
 msgstr "Activer"
 
-<<<<<<< HEAD
 #: wp-activate.php:129
 msgid "Activation Key:"
 msgstr "Clé d’activation :"
@@ -16391,16 +16015,3 @@ msgstr "Clé d’activation :"
 #: wp-activate.php:126
 msgid "Activation Key Required"
 msgstr "Clé d’activation requise"
-=======
-#: wp-includes/script-loader.php:133 wp-includes/script-loader.php:565
-#: wp-includes/script-loader.php:645 wp-includes/script-loader.php:850
-#: wp-includes/class-wp-xmlrpc-server.php:3689 wp-includes/functions.php:2666
-#: wp-includes/class-wp-customize-manager.php:450
-msgid "Something went wrong."
-msgstr "Une mauvaise manipulation ?"
-
-#: wp-includes/script-loader.php:566
-#: wp-includes/class-wp-customize-manager.php:515
-msgid "You need a higher level of permission."
-msgstr "Vous devez avoir des droits supérieurs."
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1

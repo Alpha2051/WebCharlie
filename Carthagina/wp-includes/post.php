@@ -919,10 +919,7 @@ function get_page_statuses() {
  * Return statuses for privacy requests.
  *
  * @since 4.9.6
-<<<<<<< HEAD
  * @access private
-=======
->>>>>>> 2a24fe22140dfff9741f545e5582c6aa5c4a27a1
  *
  * @return array
  */
